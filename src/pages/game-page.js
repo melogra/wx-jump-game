@@ -1,3 +1,7 @@
+import { scene } from '../scene/index'
+import Cylinder from '../block/cylinder'
+import Cuboid from '../block/cuboid'
+
 export default class GameOverPage {
   constructor(callbacks) {
     this.callbacks = callbacks
@@ -5,11 +9,23 @@ export default class GameOverPage {
 
   init() {
     console.log('init game page')
-    this.scene = 'scene'
+    this.scene = scene
+    this.scene.init()
+    this.addInitBlock()
 
-    setTimeout(() => {
-      this.callbacks.showGameOverPage()
-    }, 2000)
+    this.render()
+  }
+
+  addInitBlock() {
+    const cylinderBlock = new Cuboid(-15, 0, 0)
+    const cuboidBlock = new Cylinder(23, 0, 0)
+    this.scene.instance.add(cylinderBlock.instance)
+    this.scene.instance.add(cuboidBlock.instance)
+  }
+
+  render() {
+    this.scene.render()
+    requestAnimationFrame(this.render.bind(this))
   }
 
   show() {
