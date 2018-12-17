@@ -6,7 +6,7 @@ export default class Cuboid extends Base {
     const size = width || this.width
 
     const geometry = new THREE.BoxGeometry(size, this.height, size)
-    const material = new THREE.MeshBasicMaterial({
+    const material = new THREE.MeshPhongMaterial({
       color: 0xffffff
     })
 
@@ -17,7 +17,10 @@ export default class Cuboid extends Base {
     this.z = z
 
     instance.position.x = x
-    instance.position.y = x
-    instance.position.z = x
+    instance.position.y = y
+    instance.position.z = z
+
+    instance.castShadow = true
+    instance.receiveShadow = true
   }
 }
