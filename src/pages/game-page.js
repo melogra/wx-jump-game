@@ -2,6 +2,7 @@ import { scene } from '../scene/index'
 import Cylinder from '../block/cylinder'
 import Cuboid from '../block/cuboid'
 import ground from '../objects/ground'
+import bottle from '../objects/bottle'
 
 export default class GameOverPage {
   constructor(callbacks) {
@@ -11,11 +12,14 @@ export default class GameOverPage {
   init() {
     console.log('init game page')
     this.scene = scene
-    this.scene.init()
     this.ground = ground
+    this.bottle = bottle
+    this.scene.init()
     this.ground.init()
+    this.bottle.init()
     this.addInitBlock()
     this.addGround()
+    this.addBottle()
 
     this.render()
   }
@@ -31,8 +35,16 @@ export default class GameOverPage {
     this.scene.instance.add(ground.instance)
   }
 
+  addBottle() {
+    this,scene.instance.add(this.bottle.obj)
+    this.bottle.showUp()
+  }
+
   render() {
     this.scene.render()
+    if (this.bottle) {
+      this.bottle.update()
+    }
     requestAnimationFrame(this.render.bind(this))
   }
 
